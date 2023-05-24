@@ -2,6 +2,7 @@ import LineItem from "./LineItem";
 
 const ItemList = ({ items, handleCheck, handleDelete }) => {
   return (
+    
     <ul>
       {items.map((item) => (
         <LineItem
