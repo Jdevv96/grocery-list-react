@@ -6,11 +6,12 @@ This repo contains a simple grocery list app, created as part of my learning pro
 
 - Add grocery items to the list
 - Mark items as completed and remove from list
+- Filter and search capabilites to find specific items
 
 ## Features still to come
-
-- Filter and search functions to find specific items
 - Responsive design, for an enjoyable experience on any device
+- Login functionality to save users unique lists
+- API integration to allow for detailed grocery items information in real time
 
 ### Tools used
 
