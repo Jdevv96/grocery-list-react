@@ -1,4 +1,4 @@
-# grocery-list-react
+# Grocery List - React
 
 This repo contains a simple grocery list app, created as part of my learning process with React.js.
 
