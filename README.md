@@ -18,6 +18,7 @@ This repo contains a simple grocery list app, created as part of my learning pro
 - React.js 
 - HTML 
 - CSS
+- JSON Server for mock database
 
 #### Other
 
