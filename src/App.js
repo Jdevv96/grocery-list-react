@@ -4,6 +4,7 @@ import AddItem from "./AddItem";
 import SearchItem from "./SearchItem";
 import Footer from "./Footer";
 import { useState, useEffect } from "react";
+import apiRequest from "./apiRequest";
 
 function App() {
   const API_URL = "http://localhost:3500/items";
@@ -15,7 +16,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   // called when state of items is changed
+  // READ
   useEffect(() => {
+    // Performs reading part of CRUD
     const fetchItems = async () => {
       try {
         const response = await fetch(API_URL);
@@ -30,29 +33,60 @@ function App() {
       }
     };
 
-    setTimeout( () => {
-      fetchItems();
-    }, 2000)
+    fetchItems();
     
-  }, []);
+  }, []); // Empty dependencies -> effect runs once
 
-  const addItem = (item) => {
+  //CREATE
+  const addItem = async (item) => {
+    // Performs adding an item, part of CRUD
     const id = items.length ? items[items.length - 1].id + 1 : 1;
     const addedItem = { id, checked: false, item };
     const listItems = [...items, addedItem];
     setItems(listItems);
+
+    const postOptions = {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify(addedItem)
+    }
+    const result = await apiRequest(API_URL, postOptions);
+    if (result) setFetchError(result);
   };
 
-  const handleCheck = (id) => {
+  // UPDATE
+  const handleCheck = async  (id) => {
     const listItems = items.map((item) =>
       item.id === id ? { ...item, checked: !item.checked } : item
     );
     setItems(listItems);
+
+    // Updates item as part of CRUD
+    const myItem = listItems.filter(item => item.id === id);
+    const updateOptions = {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ checked: myItem[0].checked})
+    };
+    const requestURL = API_URL + "/" + id;
+    const result = await apiRequest(requestURL, updateOptions);
+    if (result) setFetchError(result);
   };
 
-  const handleDelete = (id) => {
+  // DELETE
+  const handleDelete = async (id) => {
     const listItems = items.filter((item) => item.id !== id);
     setItems(listItems);
+
+    const deleteOptions = { method: "DELETE" };
+    const reqUrl = API_URL + "/" + id;
+    const result = await apiRequest(reqUrl, deleteOptions);
+    if (result) setFetchError(result);
+
   };
 
   const handleSubmit = (event) => {

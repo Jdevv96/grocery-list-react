@@ -1,19 +1,9 @@
 {
   "items": [
     {
-      "id": 1,
+      "id": 5,
       "checked": false,
-      "item": "Cereal"
-    },
-    {
-      "id": 2,
-      "checked": false,
-      "item": "Eggs"
-    },
-    {
-      "id": 3,
-      "checked": false,
-      "item": "Bananas"
+      "item": "Cheese"
     }
   ]
 }
